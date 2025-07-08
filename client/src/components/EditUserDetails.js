@@ -15,14 +15,6 @@ const EditUserDetails = ({ onClose, user }) => {
   const uploadPhotoRef = useRef();
   const dispatch = useDispatch();
 
-  // useEffect(()=>{
-  //     setData((preve)=>{
-  //         return{
-  //             ...preve,
-  //             ...user
-  //         }
-  //     })
-  // },[user])
   useEffect(() => {
     if (user) {
       setData({
