@@ -24,27 +24,38 @@ async function checkPassword(req, res) {
     });
 
     // Correct cookie options
+   
+
+    console.log("✅ JWT Token generated:", token);
+
     const cookieOptions = {
       httpOnly: true,
       secure: true,
       sameSite: "None",
     };
 
-    // Send cookie + response
-   return res
-  .cookie("token", token, cookieOptions)
-  .status(200)
-  .json({ 
-    message: "Login successfully", 
-    success: true, 
-    token, // ✅ ADD THIS LINE
-    data: {
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      profile_pic: user.profile_pic,
-    }
-  });
+    return res
+      .cookie("token", token, cookieOptions)
+      .status(200)
+      .json({
+        message: "Login successfully",
+        success: true,
+        token,
+        data: {
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+          profile_pic: user.profile_pic,
+        },
+      });
 
+  } catch (error) {
+    console.error("🔥 Error during login:", error);
+    return res.status(500).json({
+      message: error.message || error,
+      error: true,
+    });
+  }
+}
 
 module.exports = checkPassword;
