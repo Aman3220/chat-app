@@ -45,11 +45,20 @@ const Home = () => {
 
   /***socket connection */
   useEffect(() => {
+    // const socketConnection = io(process.env.REACT_APP_BACKEND_URL, {
+    //   auth: {
+    //     token: localStorage.getItem("token"),
+    //   },
+    // });
     const socketConnection = io(process.env.REACT_APP_BACKEND_URL, {
-      auth: {
-        token: localStorage.getItem("token"),
-      },
-    });
+  transports: ['websocket'],
+  secure: true,
+  auth: {
+    token: localStorage.getItem("token"),
+  },
+});
+
+ye edit karke dekh chal raha?
 
     socketConnection.on("onlineUser", (data) => {
       console.log(data);
