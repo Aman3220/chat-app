@@ -53,6 +53,7 @@ const CheckPasswordPage = () => {
         })
 
      console.log("✅ Login response:", response?.data?.token);
+     console.log("✅ Login response:", response);
         toast.success(response.data.message)
 
         if(response.data.success){
