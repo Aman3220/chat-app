@@ -12,7 +12,11 @@ const uploadFile = async(file)=>{
     const responseData = await response.json()
 
 
-    return responseData
+    // return responseData
+    return {
+    url: responseData.secure_url, // use secure HTTPS url
+    public_id: responseData.public_id,
+  };
 }
 
 export default uploadFile
