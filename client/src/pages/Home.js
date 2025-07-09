@@ -124,31 +124,64 @@ const Home = () => {
 
 
   const basePath = location.pathname === "/";
+  // return (
+  //   <div className="grid lg:grid-cols-[300px,1fr] h-screen max-h-screen">
+  //     <section className={`bg-white ${!basePath && "hidden"} lg:block`}>
+  //       <Sidebar />
+  //     </section>
+
+  //     {/**message component**/}
+  //     <section className={`${basePath && "hidden"}`}>
+  //       <Outlet />
+  //     </section>
+
+  //     <div
+  //       className={`justify-center items-center flex-col gap-2 hidden ${
+  //         !basePath ? "hidden" : "lg:flex"
+  //       }`}
+  //     >
+  //       <div>
+  //         <img src={logo} width={250} alt="logo" />
+  //       </div>
+  //       <p className="text-lg mt-2 text-slate-500">
+  //         Select user to send message
+  //       </p>
+  //     </div>
+  //   </div>
+  // );
   return (
-    <div className="grid lg:grid-cols-[300px,1fr] h-screen max-h-screen">
-      <section className={`bg-white ${!basePath && "hidden"} lg:block`}>
-        <Sidebar />
-      </section>
+  <div className="grid lg:grid-cols-[300px,1fr] h-screen max-h-screen">
+    <section className={`bg-white ${!basePath && "hidden"} lg:block`}>
+      <Sidebar />
+    </section>
 
-      {/**message component**/}
-      <section className={`${basePath && "hidden"}`}>
-        <Outlet />
-      </section>
+    {/* Message component */}
+    <section className={`${basePath && "hidden"}`}>
+      <Outlet />
+    </section>
 
-      <div
-        className={`justify-center items-center flex-col gap-2 hidden ${
-          !basePath ? "hidden" : "lg:flex"
-        }`}
-      >
-        <div>
-          <img src={logo} width={250} alt="logo" />
-        </div>
-        <p className="text-lg mt-2 text-slate-500">
-          Select user to send message
-        </p>
+    <div
+      className={`justify-center items-center flex-col gap-2 hidden ${
+        !basePath ? "hidden" : "lg:flex"
+      }`}
+    >
+      <div>
+        <img src={logo} width={250} alt="logo" />
       </div>
+
+      {!user?._id ? (
+        <button
+          onClick={() => navigate("/email")}
+          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+        >
+          Login to Start Messaging
+        </button>
+      ) : (
+        <p className="text-lg mt-2 text-slate-500">Select user to send message</p>
+      )}
     </div>
-  );
+  </div>
+);
 };
 
 export default Home;
