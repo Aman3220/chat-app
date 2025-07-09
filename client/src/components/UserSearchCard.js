@@ -4,10 +4,12 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
 
 const UserSearchCard = ({user, onClose}) => {
-  const loggedInUser = useSelector((state) => state.user?.data);
-  console.log(loggedInUser)
+ const loggedInUser = useSelector((state) => state.user); 
+
   const displayName = user?._id === loggedInUser?._id ? 'You' : user?.name;
-  console.log(displayName)
+
+  console.log("👤 loggedInUser ID:", loggedInUser?._id);
+  console.log("🧾 Compared user:", user?.name, "→", displayName);
   return (
     <Link to={"/"+user?._id} onClick={onClose} className='flex items-center gap-3 p-2 lg:p-4 border border-transparent border-b-slate-200 hover:border hover:border-primary rounded cursor-pointer'>
         <div>
