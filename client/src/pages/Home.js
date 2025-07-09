@@ -44,33 +44,84 @@ const Home = () => {
   }, []);
 
   /***socket connection */
+//   useEffect(() => {
+//     // const socketConnection = io(process.env.REACT_APP_BACKEND_URL, {
+//     //   auth: {
+//     //     token: localStorage.getItem("token"),
+//     //   },
+//     // });
+//     const socketConnection = io(process.env.REACT_APP_BACKEND_URL, {
+//   transports: ['websocket'],
+//   secure: true,
+//   auth: {
+//     token: localStorage.getItem("token"),
+//   },
+// });
+//     socketConnection.on("onlineUser", (data) => {
+//       console.log(data);
+//       dispatch(setOnlineUser(data));
+//     });
+
+//     dispatch(setSocketConnection(socketConnection));
+
+//     return () => {
+//       socketConnection.disconnect();
+//     };
+//   }, []);
+
+//   useEffect(() => {
+//   if (!user?._id) return;
+
+//   const socketConnection = io(process.env.REACT_APP_BACKEND_URL, {
+//     transports: ['websocket'],
+//     secure: true,
+//     auth: {
+//       token: localStorage.getItem("token"),
+//     },
+//   });
+
+//     console.log( token)
+
+//   socketConnection.on("onlineUser", (data) => {
+//     console.log(data);
+//     dispatch(setOnlineUser(data));
+//   });
+
+//   dispatch(setSocketConnection(socketConnection));
+
+//   return () => {
+//     socketConnection.disconnect();
+//   };
+// }, [user?._id]);
+
   useEffect(() => {
-    // const socketConnection = io(process.env.REACT_APP_BACKEND_URL, {
-    //   auth: {
-    //     token: localStorage.getItem("token"),
-    //   },
-    // });
-    const socketConnection = io(process.env.REACT_APP_BACKEND_URL, {
-  transports: ['websocket'],
-  secure: true,
-  auth: {
-    token: localStorage.getItem("token"),
-  },
-});
+  if (!user?._id) return;
 
+  const token = localStorage.getItem("token"); // ✅ Define token first
 
+  console.log(token); // ✅ This will now work correctly
 
-    socketConnection.on("onlineUser", (data) => {
-      console.log(data);
-      dispatch(setOnlineUser(data));
-    });
+  const socketConnection = io(process.env.REACT_APP_BACKEND_URL, {
+    transports: ['websocket'],
+    secure: true,
+    auth: {
+      token, // ✅ Pass it here
+    },
+  });
 
-    dispatch(setSocketConnection(socketConnection));
+  socketConnection.on("onlineUser", (data) => {
+    console.log("Online users:", data);
+    dispatch(setOnlineUser(data));
+  });
 
-    return () => {
-      socketConnection.disconnect();
-    };
-  }, []);
+  dispatch(setSocketConnection(socketConnection));
+
+  return () => {
+    socketConnection.disconnect();
+    console.log("Socket disconnected");
+  };
+}, [user?._id]);
+
 
   const basePath = location.pathname === "/";
   return (
