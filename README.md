@@ -31,8 +31,7 @@ A full-featured, interactive, and responsive real-time chat app built using the 
 - 🛢 MongoDB (Mongoose)  
 - 📡 Socket.IO Server  
 - 🗂 Cloudinary (for file uploads)  
-- 🔐 JWT + HTTP-only Cookies  
-
+- 🔐 JWT
 ---
 
 ## 🌐 Live Demo
